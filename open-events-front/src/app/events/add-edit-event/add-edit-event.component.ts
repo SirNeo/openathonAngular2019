@@ -4,6 +4,7 @@ import { Event } from "../../models/event";
 import { EventService } from "../../core/event.service";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
+import { User } from "../../models/user";
 
 @Component({
   selector: "oevents-add-edit-event",
@@ -58,7 +59,11 @@ export class AddEditEventComponent implements OnInit {
   }
 
   onSubmit() {
+    const user: User = JSON.parse(localStorage.getItem("user"));
+
     this.event = this.addEditForm.value;
+    this.event.addedBy = user.email;
+    
     if (this.event.id) {
       this.eventService.updateEvent(this.event).subscribe((event: Event) => {
         console.log(event);

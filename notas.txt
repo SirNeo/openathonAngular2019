@@ -1,0 +1,16 @@
+pruebas unitarias
+pruebas de integración
+analisis con SonarQube
+Analisis de dependencias y/o vulnerabilidades (OWASP ?)
+pipeline
+config server
+Config store
+Servidor NGINX como bastión
+ElasticSEarch Logstash Grafana - Monitorización requests
+logger-Service en front?
+
+
+
+Tareas
+------
+Reactive forms - Formulario reactivo

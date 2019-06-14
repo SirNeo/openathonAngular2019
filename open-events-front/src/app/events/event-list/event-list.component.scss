@@ -5,14 +5,23 @@
     margin: 10%;
     margin-top: 2%;
   }
-  
-  #add-event-btn {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  button {
-    max-width: 100px;
+
+  .buttons {
+    display:flex;
+
+    #add-event-btn {
+      display: flex;
+      width: 100%;
+      justify-content: flex-end;
+      
+      button {
+        max-width: 100px;
+      }
+    }
+
+    .filters {
+      width: 250px;
+    }
   }
   
   table {

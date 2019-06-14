@@ -1,8 +1,21 @@
 <div class="container">
-  <div id="add-event-btn" *ngIf="isAuthenticated">
-    <button mat-raised-button color="primary" [routerLink]="['/addEditEvent/', '']">
-      Add Event
-    </button>
+  <div class="buttons" *ngIf="isAuthenticated">
+    <div class="filters">
+      Filter:
+      <mat-slide-toggle
+            class="slide-mis-eventos"
+            [checked]="false"
+            [(ngModel)]="slideMyEvents"
+            (change)="myEventsChange()">
+          My events
+        </mat-slide-toggle>
+    </div>
+    <div id="add-event-btn" >
+      <button mat-raised-button color="primary" [routerLink]="['/addEditEvent/', '']">
+        Add Event
+      </button>
+    </div>
+    
   </div>
   <div id="eventTable">
     <table mat-table [dataSource]="events" class="mat-elevation-z8">

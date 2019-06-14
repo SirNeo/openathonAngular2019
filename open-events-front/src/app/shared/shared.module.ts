@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 // Angular material
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -26,7 +27,8 @@ import "hammerjs";
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSlideToggleModule 
   ],
   exports: [
     BrowserAnimationsModule,
@@ -39,7 +41,8 @@ import "hammerjs";
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSlideToggleModule 
   ],
   entryComponents: []
 })
