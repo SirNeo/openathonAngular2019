@@ -3,25 +3,41 @@
   <form
     novalidate
     [formGroup]="addEditForm"
-    #fform="ngForm"
     (ngSubmit)="onSubmit()"
     *ngIf="addEditForm"
   >
     <mat-form-field>
-      <input matInput placeholder="Title" type="text" formControlName="title" />
+      <input matInput placeholder="Title" type="text" formControlName="title" required />
     </mat-form-field>
+    <mat-error *ngIf="f.title.touched && f.title.errors && f.title.errors.required">
+        Title is required
+    </mat-error>
     <mat-form-field>
-      <input matInput placeholder="Date" type="date" formControlName="date" />
+      <input matInput placeholder="Date" type="date" formControlName="date" required />
     </mat-form-field>
+    <mat-error *ngIf="f.date.touched && f.date.errors && f.date.errors.required">
+      Date is required
+    </mat-error>
     <mat-form-field>
       <input
         matInput
         placeholder="Location"
         type="text"
         formControlName="location"
+        required
       />
     </mat-form-field>
-
+    <mat-error *ngIf="f.location.touched && f.location.errors">
+      <div *ngIf="f.location.errors.required">
+        Location is required
+      </div>
+       <div *ngIf="f.location.errors.minlength">
+        Min Length is 2
+      </div>
+      <div *ngIf="f.location.errors.maxlength">
+        Max Length is 25
+      </div>
+    </mat-error>
     <mat-form-field>
       <textarea
         matInput
@@ -29,8 +45,20 @@
         rows="4"
         type="text"
         formControlName="description"
+        required
       ></textarea>
     </mat-form-field>
+    <mat-error *ngIf="f.description.touched && f.description.errors">
+      <div *ngIf="f.description.errors.required">
+        Description is required
+      </div>
+       <div *ngIf="f.description.errors.minlength">
+        Min Length is 10
+      </div>
+      <div *ngIf="f.description.errors.maxlength">
+        Max Length is 400
+      </div>
+    </mat-error>
 
     <div id="save-btn">
       <button mat-raised-button color="primary" type="submit">

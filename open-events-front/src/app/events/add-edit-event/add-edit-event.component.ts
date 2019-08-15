@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
 import { Event } from "../../models/event";
 import { EventService } from "../../core/event.service";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
 import { User } from "../../models/user";
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: "oevents-add-edit-event",
@@ -15,12 +16,26 @@ export class AddEditEventComponent implements OnInit {
   addEditForm: FormGroup;
   event: Event;
 
+  validationMessages = {
+    title: { 
+        required : 'The Title field is required'
+    },
+    date: {
+        required : 'The Date field is required'
+    },
+    phone : {
+        required : 'The field is required'
+    }
+}
+
   constructor(
     private fb: FormBuilder,
     private eventService: EventService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
+
+  get f() { return this.addEditForm.controls; }
 
   ngOnInit() {
     const id = this.route.snapshot.params["id"];
@@ -37,25 +52,22 @@ export class AddEditEventComponent implements OnInit {
   }
 
   createForm() {
-    if (this.event) {
-      this.addEditForm = this.fb.group({
-        title: this.event.title,
-        location: this.event.location,
-        date: this.event.date,
-        description: this.event.description,
-        addedBy: this.event.addedBy,
-        id: this.event.id
-      });
-    } else {
-      this.addEditForm = this.fb.group({
-        title: "",
-        location: "",
-        date: "",
-        description: "",
-        addedBy: "",
-        id: ""
-      });
-    }
+    this.addEditForm = this.fb.group({
+      title: new FormControl(
+        this.event?this.event.title:'', [
+          Validators.required]),
+      location: new FormControl(this.event?this.event.location:'', [
+        Validators.required, 
+        Validators.minLength(2), 
+        Validators.maxLength(25)]),
+      date: new FormControl(this.event?this.event.date:'', [Validators.required]),
+      description: new FormControl(this.event?this.event.description:'', [
+          Validators.required, 
+          Validators.minLength(10), 
+          Validators.maxLength(400)]),
+      addedBy: this.event?this.event.addedBy:'',
+      id: this.event?this.event.id:''
+    });
   }
 
   onSubmit() {
